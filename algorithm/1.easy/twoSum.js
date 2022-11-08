@@ -3,18 +3,15 @@
  * @param {number} target
  * @return {number[]}
 */
- var twoSum = function(nums, target) {
-  let counter = 0
-  while (counter < Math.floor(target/2)) {
-      const counterPartNum = target - counter
-      const targetIndex = nums.findIndex(el => el === target)
-      const counterPartNumIndex = nums.findIndex(el => el === counterPartNum)
-      if (targetIndex && counterPartNum) {
-          return [targetIndex, counterPartNumIndex]
-      } else {
-          counter++
-      }
+var twoSum = function(nums, target) {
+  const hash = {}
+  for (let i = 0; i < nums.length; i++) {
+    const compliment = target - nums[i]
+    if (hash[compliment] >= 0) {
+      return [i, hash[compliment]]
+    }
+    hash[nums[i]] = i
   }
 };
 
-console.log(twoSum([2,7,5,1]))
+console.log(twoSum([1,2,3,8,5], 6))
